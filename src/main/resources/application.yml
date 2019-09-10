@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    username: root1
+    password: root1!
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/db_delivery?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+
+logging:
+  level:
+    root: info
+
+image:
+  path:
+    disk: /data/images/
+
+nb:
+  path:
+    disk: /data/nb/
+
+server:
+  port: 8888
+
+mybatis:
+  type-aliases-package: com.wangyao.company.delivery.dao.mapper
+  configuration:
+    cache-enabled: true

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangyao.company.delivery.dao.mapper.DeliveryItemMapper">
+  <resultMap id="BaseResultMap" type="com.wangyao.company.delivery.model.DeliveryItem">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dateTime" jdbcType="DATE" property="dateTime" />
+    <result column="states" jdbcType="TINYINT" property="states" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `dateTime`, states, remark, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_delivery_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from tb_delivery_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.DeliveryItem" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_delivery_item (`dateTime`, states, remark, 
+      createTime, updateTime)
+    values (#{dateTime,jdbcType=DATE}, #{states,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.DeliveryItem" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_delivery_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dateTime != null">
+        `dateTime`,
+      </if>
+      <if test="states != null">
+        states,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dateTime != null">
+        #{dateTime,jdbcType=DATE},
+      </if>
+      <if test="states != null">
+        #{states,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wangyao.company.delivery.model.DeliveryItem">
+    <!--@mbg.generated-->
+    update tb_delivery_item
+    <set>
+      <if test="dateTime != null">
+        `dateTime` = #{dateTime,jdbcType=DATE},
+      </if>
+      <if test="states != null">
+        states = #{states,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wangyao.company.delivery.model.DeliveryItem">
+    <!--@mbg.generated-->
+    update tb_delivery_item
+    set `dateTime` = #{dateTime,jdbcType=DATE},
+      states = #{states,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

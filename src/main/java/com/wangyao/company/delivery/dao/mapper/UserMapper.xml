@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangyao.company.delivery.dao.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.wangyao.company.delivery.model.User">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="states" jdbcType="TINYINT" property="states" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, account, `password`, states, remark, address, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from tb_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.User" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_user (`name`, account, `password`, 
+      states, remark, address, 
+      createTime, updateTime)
+    values (#{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{states,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.User" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="states != null">
+        states,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="states != null">
+        #{states,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wangyao.company.delivery.model.User">
+    <!--@mbg.generated-->
+    update tb_user
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="states != null">
+        states = #{states,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wangyao.company.delivery.model.User">
+    <!--@mbg.generated-->
+    update tb_user
+    set `name` = #{name,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      states = #{states,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="listByForm" parameterType="com.wangyao.company.delivery.form.UserForm" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_user
+    <where>
+      <if test="name != null and name != ''">
+        name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    <if test="size != null and size > 0">
+      like #{start}, #{size}
+    </if>
+  </select>
+
+  <select id="countByForm" parameterType="com.wangyao.company.delivery.form.UserForm" resultType="java.lang.Integer">
+    select
+      count(*)
+    from tb_user
+    <where>
+      <if test="name != null and name != ''">
+        name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2019-09-10-->
+  <select id="getByAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from tb_user
+    where 1=1
+    <if test="id != null">
+      and id=#{id,jdbcType=BIGINT}
+    </if>
+    <if test="name != null">
+      and `name`=#{name,jdbcType=VARCHAR}
+    </if>
+    <if test="account != null">
+      and account=#{account,jdbcType=VARCHAR}
+    </if>
+    <if test="password != null">
+      and `password`=#{password,jdbcType=VARCHAR}
+    </if>
+    <if test="states != null">
+      and states=#{states,jdbcType=TINYINT}
+    </if>
+    <if test="remark != null">
+      and remark=#{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="address != null">
+      and address=#{address,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2019-09-10-->
+  <select id="countByAccount" resultType="java.lang.Integer">
+    select count(1)
+    from tb_user
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2019-09-10-->
+  <select id="countByName" resultType="java.lang.Integer">
+    select count(1)
+    from tb_user
+    where `name` = #{name,jdbcType=VARCHAR}
+  </select>
+</mapper>

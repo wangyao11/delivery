@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangyao.company.delivery.dao.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.wangyao.company.delivery.model.Product">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="imageUrl" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="classId" jdbcType="BIGINT" property="classId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="states" jdbcType="TINYINT" property="states" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, imageUrl, classId, remark, states, `type`, sort, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from tb_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.Product" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_product (`name`, imageUrl, classId, 
+      remark, states, `type`, 
+      sort, createTime, updateTime
+      )
+    values (#{name,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{classId,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{states,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, 
+      #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.Product" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="imageUrl != null">
+        imageUrl,
+      </if>
+      <if test="classId != null">
+        classId,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="states != null">
+        states,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="states != null">
+        #{states,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wangyao.company.delivery.model.Product">
+    <!--@mbg.generated-->
+    update tb_product
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        imageUrl = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null">
+        classId = #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="states != null">
+        states = #{states,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wangyao.company.delivery.model.Product">
+    <!--@mbg.generated-->
+    update tb_product
+    set `name` = #{name,jdbcType=VARCHAR},
+      imageUrl = #{imageUrl,jdbcType=VARCHAR},
+      classId = #{classId,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      states = #{states,jdbcType=TINYINT},
+      `type` = #{type,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangyao.company.delivery.dao.mapper.DeliveryUserProductMapperMapper">
+  <resultMap id="BaseResultMap" type="com.wangyao.company.delivery.model.DeliveryUserProductMapper">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="deliveryItemId" jdbcType="DATE" property="deliveryItemId" />
+    <result column="userId" jdbcType="TINYINT" property="userId" />
+    <result column="productId" jdbcType="TINYINT" property="productId" />
+    <result column="totalCount" jdbcType="INTEGER" property="totalCount" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, deliveryItemId, userId, productId, totalCount, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_delivery_user_product_mapper
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from tb_delivery_user_product_mapper
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.DeliveryUserProductMapper" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_delivery_user_product_mapper (deliveryItemId, userId, productId, 
+      totalCount, createTime, updateTime
+      )
+    values (#{deliveryItemId,jdbcType=DATE}, #{userId,jdbcType=TINYINT}, #{productId,jdbcType=TINYINT}, 
+      #{totalCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.DeliveryUserProductMapper" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_delivery_user_product_mapper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deliveryItemId != null">
+        deliveryItemId,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="productId != null">
+        productId,
+      </if>
+      <if test="totalCount != null">
+        totalCount,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deliveryItemId != null">
+        #{deliveryItemId,jdbcType=DATE},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=TINYINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=TINYINT},
+      </if>
+      <if test="totalCount != null">
+        #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wangyao.company.delivery.model.DeliveryUserProductMapper">
+    <!--@mbg.generated-->
+    update tb_delivery_user_product_mapper
+    <set>
+      <if test="deliveryItemId != null">
+        deliveryItemId = #{deliveryItemId,jdbcType=DATE},
+      </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=TINYINT},
+      </if>
+      <if test="productId != null">
+        productId = #{productId,jdbcType=TINYINT},
+      </if>
+      <if test="totalCount != null">
+        totalCount = #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wangyao.company.delivery.model.DeliveryUserProductMapper">
+    <!--@mbg.generated-->
+    update tb_delivery_user_product_mapper
+    set deliveryItemId = #{deliveryItemId,jdbcType=DATE},
+      userId = #{userId,jdbcType=TINYINT},
+      productId = #{productId,jdbcType=TINYINT},
+      totalCount = #{totalCount,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
