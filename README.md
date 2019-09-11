@@ -1,6 +1,6 @@
 # 学校食堂配送系统服务端
 
-##数据库设计
+## 数据库设计
 ```sql
 -- 用户(学校)
 CREATE TABLE tb_user
@@ -84,3 +84,22 @@ CREATE TABLE tb_delivery_user_product_mapper
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ```
+
+## 目录结构
+
+|-- delivery                //根目录
+|   |-- action              //接口定义
+|   |-- config              //系统配置、拦截器
+|   |-- dao                 //数据库操作
+|   |   |-- mapper          //mybatis xml
+|   |-- enums               //枚举
+|   |-- exception           //自定义异常
+|   |-- form                //前端入参定义
+|   |-- model               //数据表应该bean
+|   |-- service             //处理action中业务逻辑
+|   |-- util                //工具
+|   |-- vo                  //前端出参定义
+|   |-- wechat              //小程序接口定义
+|   |-- PageParam           //分页入参
+|   |-- PageResult          //分页出参
+|   `-- ResponseEntity      //前端返回值
