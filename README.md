@@ -74,9 +74,9 @@ CREATE TABLE tb_delivery_item
 CREATE TABLE tb_delivery_user_product_mapper
 (
   id bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  deliveryItemId date NOT NULL COMMENT '配送单Id',
-  userId tinyint(4) NOT NULL COMMENT '用户',
-  productId tinyint(4) NOT NULL COMMENT '产品ID',
+  deliveryItemId bigint(20) NOT NULL COMMENT '配送单Id',
+  userId bigint(20) NOT NULL COMMENT '用户',
+  productId bigint(20) NOT NULL COMMENT '产品ID',
   totalCount int NOT NULL DEFAULT 0 COMMENT '产品数量',
   createTime datetime DEFAULT NULL COMMENT '记录创建时间',
   updateTime datetime DEFAULT NULL COMMENT '记录更新时间',

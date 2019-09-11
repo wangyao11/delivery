@@ -1,10 +1,12 @@
 package com.wangyao.company.delivery.dao;
 
+import com.wangyao.company.delivery.form.DeliveryForm;
 import com.wangyao.company.delivery.model.DeliveryItem;
 import com.wangyao.company.delivery.dao.mapper.DeliveryItemMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author wy
@@ -47,4 +49,7 @@ public class DeliveryItemDao {
         return deliveryItemMapper.updateByPrimaryKey(record);
     }
 
+    public List<DeliveryItem> listByDateTimeOrderByDateTime(DeliveryForm deliveryForm) {
+        return deliveryItemMapper.listByDateTimeOrderByDateTime(deliveryForm);
+    }
 }

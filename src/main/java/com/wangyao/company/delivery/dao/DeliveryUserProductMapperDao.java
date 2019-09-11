@@ -1,10 +1,13 @@
 package com.wangyao.company.delivery.dao;
 
+import com.wangyao.company.delivery.form.DeliveryUserProductForm;
 import com.wangyao.company.delivery.model.DeliveryUserProductMapper;
 import com.wangyao.company.delivery.dao.mapper.DeliveryUserProductMapperMapper;
+import com.wangyao.company.delivery.model.DeliveryUserProductParam;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author wy
@@ -45,6 +48,10 @@ public class DeliveryUserProductMapperDao {
     
     public int updateByPrimaryKey(DeliveryUserProductMapper record) {
         return deliveryUserProductMapperMapper.updateByPrimaryKey(record);
+    }
+
+    public List<DeliveryUserProductMapper> listByParam(DeliveryUserProductParam deliveryUserProductParam) {
+        return deliveryUserProductMapperMapper.listByParam(deliveryUserProductParam);
     }
 
 }

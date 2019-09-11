@@ -4,8 +4,10 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,20 @@ import java.io.IOException;
 
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
+
+    @Resource
+    private SecurityInterceptor securityInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        //TODO 定义详细的忽略规则
+        registry.addInterceptor(securityInterceptor)
+                .excludePathPatterns("/**/admin/login")
+                .excludePathPatterns("/error")
+                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**")
+                .addPathPatterns("/**");
+    }
+
     @Bean
     public FilterRegistrationBean corsFilter() {
         return new FilterRegistrationBean(new Filter() {

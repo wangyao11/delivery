@@ -1,4 +1,6 @@
 package com.wangyao.company.delivery.dao.mapper;
+import com.wangyao.company.delivery.form.DeliveryForm;
+import java.util.List;
 
 import com.wangyao.company.delivery.model.DeliveryItem;
 
@@ -19,4 +21,6 @@ public interface DeliveryItemMapper {
     int updateByPrimaryKeySelective(DeliveryItem record);
 
     int updateByPrimaryKey(DeliveryItem record);
+
+    List<DeliveryItem> listByDateTimeOrderByDateTime(DeliveryForm deliveryForm);
 }

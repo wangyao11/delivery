@@ -31,7 +31,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("/web/admim")
+@RequestMapping("/web/admin")
 @Api(value = "adminAction", description = "管理员")
 public class AdminAction {
 

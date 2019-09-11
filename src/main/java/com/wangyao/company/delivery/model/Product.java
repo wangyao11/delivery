@@ -1,7 +1,11 @@
 package com.wangyao.company.delivery.model;
 
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author wy
@@ -9,6 +13,9 @@ import lombok.Data;
  * @description:
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     /**
     * 产品Id

@@ -1,6 +1,12 @@
 package com.wangyao.company.delivery.dao.mapper;
+import com.wangyao.company.delivery.form.DeliveryUserProductForm;
+import com.wangyao.company.delivery.model.DeliveryUserProductParam;
+import org.apache.ibatis.annotations.Param;
+import java.util.Date;
 
 import com.wangyao.company.delivery.model.DeliveryUserProductMapper;
+
+import java.util.List;
 
 /**
  * @author wy
@@ -19,4 +25,8 @@ public interface DeliveryUserProductMapperMapper {
     int updateByPrimaryKeySelective(DeliveryUserProductMapper record);
 
     int updateByPrimaryKey(DeliveryUserProductMapper record);
+
+    List<DeliveryUserProductMapper> listByParam(DeliveryUserProductParam deliveryUserProductParam);
+
+
 }
