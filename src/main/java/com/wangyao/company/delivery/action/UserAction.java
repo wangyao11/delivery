@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author wy
@@ -69,7 +68,7 @@ public class UserAction {
             .remark(userAddForm.getRemark())
             .states(0).build());
         } else {
-            throw new BusinessException("添加失败,该账户已存在");
+            throw new BusinessException("添加失败,该学校已存在");
         }
         return new ResponseEntity();
     }

@@ -1,4 +1,6 @@
 package com.wangyao.company.delivery.dao.mapper;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import com.wangyao.company.delivery.model.ProductClass;
 
@@ -19,4 +21,10 @@ public interface ProductClassMapper {
     int updateByPrimaryKeySelective(ProductClass record);
 
     int updateByPrimaryKey(ProductClass record);
+
+    List<ProductClass> getOrderByCreateTimeDesc();
+
+    int countByName(@Param("name")String name);
+
+
 }

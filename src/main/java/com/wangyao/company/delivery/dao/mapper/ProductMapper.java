@@ -1,4 +1,7 @@
 package com.wangyao.company.delivery.dao.mapper;
+import com.wangyao.company.delivery.form.ProductForm;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import com.wangyao.company.delivery.model.Product;
 
@@ -19,4 +22,9 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    List<Product> listByForm(ProductForm productForm);
+
+    int countByName(@Param("name")String name);
+
 }

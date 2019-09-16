@@ -1,10 +1,13 @@
 package com.wangyao.company.delivery.dao;
 
+import com.wangyao.company.delivery.form.ProductForm;
 import com.wangyao.company.delivery.model.Product;
 import com.wangyao.company.delivery.dao.mapper.ProductMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author wy
@@ -45,6 +48,14 @@ public class ProductDao {
     
     public int updateByPrimaryKey(Product record) {
         return productMapper.updateByPrimaryKey(record);
+    }
+
+    public List<Product> listByForm(ProductForm productForm){
+        return productMapper.listByForm(productForm);
+    }
+
+    public int countByName(String name) {
+        return productMapper.countByName(name);
     }
 
 }

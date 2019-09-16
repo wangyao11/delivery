@@ -2,9 +2,11 @@ package com.wangyao.company.delivery.dao;
 
 import com.wangyao.company.delivery.model.ProductClass;
 import com.wangyao.company.delivery.dao.mapper.ProductClassMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author wy
@@ -46,4 +48,11 @@ public class ProductClassDao {
         return productClassMapper.updateByPrimaryKey(record);
     }
 
+    public List<ProductClass> getOrderByCreateTimeDesc() {
+        return productClassMapper.getOrderByCreateTimeDesc();
+    }
+
+    public int countByName(String name) {
+        return productClassMapper.countByName(name);
+    }
 }
