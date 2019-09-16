@@ -87,6 +87,8 @@ CREATE TABLE tb_delivery_user_product_mapper
 
 ## 目录结构
 
+```
+
 |-- delivery                //根目录
 |   |-- action              //接口定义
 |   |-- config              //系统配置、拦截器
@@ -103,3 +105,5 @@ CREATE TABLE tb_delivery_user_product_mapper
 |   |-- PageParam           //分页入参
 |   |-- PageResult          //分页出参
 |   `-- ResponseEntity      //前端返回值
+
+```
