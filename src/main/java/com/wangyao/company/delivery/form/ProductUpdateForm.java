@@ -19,7 +19,10 @@ import javax.validation.constraints.Size;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductAddForm {
+public class ProductUpdateForm {
+
+    @NotNull
+    private Long id;
 
     @Size(max = 50)
     @NotBlank
@@ -34,6 +37,7 @@ public class ProductAddForm {
     @Size(max = 100)
     private String remark;
 
+    @NotNull
     private float price;
 
     @NotNull

@@ -18,15 +18,12 @@ public interface DeliveryUserProductMapperMapper {
 
     int insert(DeliveryUserProductMapper record);
 
-    int insertSelective(DeliveryUserProductMapper record);
-
     DeliveryUserProductMapper selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(DeliveryUserProductMapper record);
 
-    int updateByPrimaryKey(DeliveryUserProductMapper record);
-
     List<DeliveryUserProductMapper> listByParam(DeliveryUserProductParam deliveryUserProductParam);
 
+    DeliveryUserProductMapper getByUserIdAndProductIdAndDeliveryItemId(DeliveryUserProductParam deliveryUserProductParam);
 
 }

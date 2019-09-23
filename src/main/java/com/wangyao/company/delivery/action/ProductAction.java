@@ -5,6 +5,7 @@ import com.wangyao.company.delivery.dao.ProductDao;
 import com.wangyao.company.delivery.exception.BusinessException;
 import com.wangyao.company.delivery.form.ProductAddForm;
 import com.wangyao.company.delivery.form.ProductForm;
+import com.wangyao.company.delivery.form.ProductUpdateForm;
 import com.wangyao.company.delivery.model.Product;
 import com.wangyao.company.delivery.util.ValidationUtils;
 import io.swagger.annotations.Api;
@@ -55,11 +56,27 @@ public class ProductAction {
                     .name(productAddForm.getName())
                     .classId(productAddForm.getClassId())
                     .remark(productAddForm.getRemark())
+                    .price(productAddForm.getPrice())
                     .type(productAddForm.getType())
                     .build());
         } else {
             throw new BusinessException("添加失败,该产品已存在");
         }
+        return new ResponseEntity();
+    }
+
+    @RequestMapping(value = "updateById", method = RequestMethod.POST)
+    @ApiOperation(value = "修改商品", notes = "修改商品")
+    ResponseEntity updateById(@RequestBody ProductUpdateForm productUpdateForm) throws BusinessException {
+        ValidationUtils.validate(productUpdateForm);
+        productDao.updateById(Product.builder()
+                .id(productUpdateForm.getId())
+                .name(productUpdateForm.getName())
+                .classId(productUpdateForm.getClassId())
+                .price(productUpdateForm.getPrice())
+                .remark(productUpdateForm.getRemark())
+                .type(productUpdateForm.getType())
+                .build());
         return new ResponseEntity();
     }
 }

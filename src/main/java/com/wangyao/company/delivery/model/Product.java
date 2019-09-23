@@ -2,6 +2,7 @@ package com.wangyao.company.delivery.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,6 +43,8 @@ public class Product {
     */
     private String remark;
 
+    private float price;
+
     /**
     * 状态:0-上架,1-下架
     */
@@ -60,10 +63,12 @@ public class Product {
     /**
     * 记录创建时间
     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     /**
     * 记录更新时间
     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 }

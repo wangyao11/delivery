@@ -1,6 +1,7 @@
 package com.wangyao.company.delivery.action;
 
 import com.wangyao.company.delivery.ResponseEntity;
+import com.wangyao.company.delivery.dao.DeliveryUserProductMapperDao;
 import com.wangyao.company.delivery.form.DeliveryUserProductForm;
 import com.wangyao.company.delivery.model.DeliveryUserProductMapper;
 import com.wangyao.company.delivery.service.DeliveryUserProductMapperService;
@@ -25,6 +26,8 @@ public class DeliveryUserProductAction {
 
     @Resource
     private DeliveryUserProductMapperService deliveryUserProductMapperService;
+    @Resource
+    private DeliveryUserProductMapperDao deliveryUserProductMapperDao;
 
     @RequestMapping(value = "list", method = RequestMethod.POST)
     @ApiOperation(value = "查询配送单详情", notes = "查询用户某一天的配送单详情")
@@ -33,6 +36,13 @@ public class DeliveryUserProductAction {
         ResponseEntity<List<DeliveryUserProductMapper>> listResponseEntity = new ResponseEntity<>();
         listResponseEntity.setValue(deliveryUserProductMappers);
         return listResponseEntity;
+    }
+
+    @RequestMapping(value = "deleteById", method = RequestMethod.POST)
+    @ApiOperation(value = "deleteById", notes = "删除商品从配送单中")
+    public ResponseEntity deleteById(@RequestParam("id") Long id) {
+        deliveryUserProductMapperDao.deleteByPrimaryKey(id);
+        return new ResponseEntity();
     }
 
 }

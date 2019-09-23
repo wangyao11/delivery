@@ -19,9 +19,7 @@ public interface ProductMapper {
 
     Product selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Product record);
-
-    int updateByPrimaryKey(Product record);
+    int updateById(Product record);
 
     List<Product> listByForm(ProductForm productForm);
 

@@ -50,6 +50,7 @@ CREATE TABLE tb_product
   imageUrl varchar(100) DEFAULT NULL COMMENT '产品图片',
   classId bigint(20) NOT NULL DEFAULT 0 COMMENT '分类Id',
   remark varchar(100) DEFAULT NULL COMMENT '备注',
+  price float(9,2) NOT NULL DEFAULT 0 '商品价格 每周可自行改动',
   states tinyint(4) NOT NULL DEFAULT 0 COMMENT '状态:0-上架,1-下架',
   type tinyint(4) NOT NULL COMMENT '商品类型 0-斤 1-袋 2-瓶 3-桶 4-包 5-个 6-件',
   sort int(10) NOT NULL DEFAULT 0 COMMENT '分类排序，从大到小',

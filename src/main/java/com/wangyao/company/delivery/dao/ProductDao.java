@@ -41,13 +41,8 @@ public class ProductDao {
     }
 
     
-    public int updateByPrimaryKeySelective(Product record) {
-        return productMapper.updateByPrimaryKeySelective(record);
-    }
-
-    
-    public int updateByPrimaryKey(Product record) {
-        return productMapper.updateByPrimaryKey(record);
+    public int updateById(Product record) {
+        return productMapper.updateById(record);
     }
 
     public List<Product> listByForm(ProductForm productForm){
