@@ -67,4 +67,7 @@ public class UserDao {
         return userMapper.countByForm(userForm);
     }
 
+    public User getByAccountAndPassword(String account, String password){
+        return userMapper.getByAccountAndPassword(account, password);
+    }
 }

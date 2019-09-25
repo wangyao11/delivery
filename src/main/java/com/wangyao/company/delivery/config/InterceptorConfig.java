@@ -30,7 +30,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
         //TODO 定义详细的忽略规则
         registry.addInterceptor(securityInterceptor)
                 .excludePathPatterns("/**/admin/login")
+                .excludePathPatterns("/**/user/login")
                 .excludePathPatterns("/error")
+                .excludePathPatterns("/web/image/uploadImage")
+                .excludePathPatterns("/images/**")
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**")
                 .addPathPatterns("/**");
     }

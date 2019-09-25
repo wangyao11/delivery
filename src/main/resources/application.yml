@@ -11,12 +11,12 @@ logging:
     root: info
 
 image:
-  path:
-    disk: /data/images/
+  path: F:\data\images
+  type: png,jpg,jpeg
+  size: 2097152
+  scaleRatio: 0.20f
 
-nb:
-  path:
-    disk: /data/nb/
+
 
 server:
   port: 8888

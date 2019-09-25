@@ -58,6 +58,7 @@ public class ProductAction {
                     .remark(productAddForm.getRemark())
                     .price(productAddForm.getPrice())
                     .type(productAddForm.getType())
+                    .imageUrl(productAddForm.getImageUrl())
                     .build());
         } else {
             throw new BusinessException("添加失败,该产品已存在");
@@ -76,6 +77,7 @@ public class ProductAction {
                 .price(productUpdateForm.getPrice())
                 .remark(productUpdateForm.getRemark())
                 .type(productUpdateForm.getType())
+                .imageUrl(productUpdateForm.getImageUrl())
                 .build());
         return new ResponseEntity();
     }

@@ -35,4 +35,5 @@ public interface UserMapper {
 
     int countByForm(UserForm userForm);
 
+    User getByAccountAndPassword(@Param("account")String account,@Param("password")String password);
 }
