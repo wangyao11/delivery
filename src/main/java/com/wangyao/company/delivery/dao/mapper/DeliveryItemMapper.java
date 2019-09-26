@@ -1,4 +1,6 @@
 package com.wangyao.company.delivery.dao.mapper;
+import org.apache.ibatis.annotations.Param;
+import java.util.Date;
 import com.wangyao.company.delivery.form.DeliveryForm;
 import java.util.List;
 
@@ -23,4 +25,6 @@ public interface DeliveryItemMapper {
     int updateByPrimaryKey(DeliveryItem record);
 
     List<DeliveryItem> listByDateTimeOrderByDateTime(DeliveryForm deliveryForm);
+
+    DeliveryItem getByDateTime(@Param("dateTime") String dateTime);
 }
