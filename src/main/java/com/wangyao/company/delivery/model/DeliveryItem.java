@@ -2,6 +2,7 @@ package com.wangyao.company.delivery.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class DeliveryItem {
     /**
     * 配送区间时间点 2019-09-04
     */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date dateTime;
 
     /**
