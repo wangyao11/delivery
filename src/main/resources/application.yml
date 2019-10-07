@@ -1,14 +1,14 @@
 spring:
   datasource:
-    username: root1
-    password: root1!
+    username: root
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/db_delivery?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
   jackson:
     time-zone: GMT+8
 logging:
   level:
-    root: info
+    root: debug
 
 image:
   path: F:\data\images

@@ -43,7 +43,7 @@ public class DeliveryUserProductWeChatAction {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    @ApiOperation(value = "add", notes = "添加商品进入配送单")
+    @ApiOperation(value = "add", notes = "添加或删除商品进入配送单")
     public ResponseEntity add(@RequestBody DeliveryUserProductAddForm deliveryUserProductAddForm) {
 
         DeliveryUserProductMapper deliveryUserProductMapper = deliveryUserProductMapperDao.getByUserIdAndProductIdAndDeliveryItemId(DeliveryUserProductParam.builder()
@@ -51,14 +51,16 @@ public class DeliveryUserProductWeChatAction {
                 .productId(deliveryUserProductAddForm.getProductId())
                 .deliveryItemId(deliveryUserProductAddForm.getDeliveryItemId()).build());
 
-        if (Objects.isNull(deliveryUserProductMapper)) {
+        if (Objects.isNull(deliveryUserProductMapper) && deliveryUserProductAddForm.getCount() > 0) {
             deliveryUserProductMapperDao.insert(DeliveryUserProductMapper.builder()
                     .userId(deliveryUserProductAddForm.getUserId())
                     .productId(deliveryUserProductAddForm.getProductId())
                     .deliveryItemId(deliveryUserProductAddForm.getDeliveryItemId())
                     .totalCount(deliveryUserProductAddForm.getCount()).build());
+        } else if (Objects.nonNull(deliveryUserProductMapper) && deliveryUserProductAddForm.getCount() == 0) {
+            deliveryUserProductMapperDao.deleteByPrimaryKey(deliveryUserProductMapper.getId());
         } else {
-            deliveryUserProductMapper.setTotalCount(deliveryUserProductMapper.getTotalCount() + deliveryUserProductAddForm.getCount());
+            deliveryUserProductMapper.setTotalCount(deliveryUserProductAddForm.getCount());
             deliveryUserProductMapperDao.updateByPrimaryKeySelective(deliveryUserProductMapper);
         }
         return new ResponseEntity();
