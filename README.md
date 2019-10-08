@@ -42,6 +42,16 @@ CREATE TABLE tb_product_class
   PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 产品单位
+CREATE TABLE tb_product_unit
+(
+  id bigint(20) NOT NULL AUTO_INCREMENT COMMENT '单位Id',
+  name varchar(100) DEFAULT NULL COMMENT '单位名称',
+  createTime datetime DEFAULT NULL COMMENT '记录创建时间',
+  updateTime datetime DEFAULT NULL COMMENT '记录更新时间',
+  PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- 产品
 CREATE TABLE tb_product
 (
@@ -52,7 +62,7 @@ CREATE TABLE tb_product
   remark varchar(100) DEFAULT NULL COMMENT '备注',
   price float(9,2) NOT NULL DEFAULT 0 '商品价格 每周可自行改动',
   states tinyint(4) NOT NULL DEFAULT 0 COMMENT '状态:0-上架,1-下架',
-  type tinyint(4) NOT NULL COMMENT '商品类型 0-斤 1-袋 2-瓶 3-桶 4-包 5-个 6-件',
+  type varchar(10) NOT NULL COMMENT '商品类型 斤等',
   sort int(10) NOT NULL DEFAULT 0 COMMENT '分类排序，从大到小',
   createTime datetime DEFAULT NULL COMMENT '记录创建时间',
   updateTime datetime DEFAULT NULL COMMENT '记录更新时间',

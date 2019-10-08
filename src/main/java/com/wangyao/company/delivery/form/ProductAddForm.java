@@ -38,7 +38,7 @@ public class ProductAddForm {
 
     @NotNull
     @ApiModelProperty("商品类型 0-斤 1-袋 2-瓶 3-桶 4-包 5-个 6-件")
-    private Integer type;
+    private String type;
 
     @ApiModelProperty("图片路径")
     private String imageUrl;

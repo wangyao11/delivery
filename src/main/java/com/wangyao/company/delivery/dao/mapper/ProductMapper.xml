@@ -10,7 +10,7 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="states" jdbcType="TINYINT" property="states" />
     <result column="price" jdbcType="FLOAT" property="price" />
-    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
@@ -38,7 +38,7 @@
       sort, createTime, updateTime
       )
     values (#{name,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{classId,jdbcType=BIGINT}, 
-      #{remark,jdbcType=VARCHAR}, #{states,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, 
+      #{remark,jdbcType=VARCHAR}, #{states,jdbcType=TINYINT}, #{type,jdbcType=VARCHAR},
       #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -93,7 +93,7 @@
         #{price} ,
       </if>
       <if test="type != null">
-        #{type,jdbcType=TINYINT},
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="sort != null">
         #{sort,jdbcType=INTEGER},
@@ -125,7 +125,7 @@
         states = #{states,jdbcType=TINYINT},
       </if>
       <if test="type != null">
-        `type` = #{type,jdbcType=TINYINT},
+        `type` = #{type,jdbcType=VARCHAR},
       </if>
       <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},

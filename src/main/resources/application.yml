@@ -8,7 +8,7 @@ spring:
     time-zone: GMT+8
 logging:
   level:
-    root: debug
+    root: info
 
 image:
   path: F:\data\images
