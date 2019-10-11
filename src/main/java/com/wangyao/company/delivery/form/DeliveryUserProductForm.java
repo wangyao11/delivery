@@ -21,4 +21,5 @@ public class DeliveryUserProductForm {
     @NotBlank
     private String startTime;
     private String endTime;
+    private Long deliveryItemId;
 }

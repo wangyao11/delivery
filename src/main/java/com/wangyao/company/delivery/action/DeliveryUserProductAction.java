@@ -63,7 +63,7 @@ public class DeliveryUserProductAction {
         DeliveryUserProductMapper deliveryUserProductMapper = deliveryUserProductMapperDao.getByUserIdAndProductIdAndDeliveryItemId(DeliveryUserProductParam.builder()
                 .userId(deliveryUserProductAddForm.getUserId())
                 .productId(deliveryUserProductAddForm.getProductId())
-                .deliveryItemId(deliveryUserProductAddForm.getDeliveryItemId()).build());
+                .deliveryItemId(deliveryItem.getId()).build());
 
         if (Objects.isNull(deliveryUserProductMapper)) {
             deliveryUserProductMapperDao.insert(DeliveryUserProductMapper.builder()

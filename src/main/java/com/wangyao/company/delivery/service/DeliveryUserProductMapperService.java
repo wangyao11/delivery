@@ -51,6 +51,15 @@ public class DeliveryUserProductMapperService{
         return getOnlyProductList(deliveryUserProductMappers);
     }
 
+    public List<DeliveryUserProductMapper> listByDeviceItemId(DeliveryUserProductForm deliveryUserProductForm){
+        List<Long> deliveryItemIds = new ArrayList<>();
+        DeliveryUserProductParam deliveryUserProductParam = new DeliveryUserProductParam();
+        deliveryUserProductParam.setUserId(deliveryUserProductForm.getUserId());
+        deliveryUserProductParam.setDeliveryItemId(deliveryUserProductForm.getDeliveryItemId());
+        List<DeliveryUserProductMapper> deliveryUserProductMappers = deliveryUserProductMapperDao.listByParam(deliveryUserProductParam);
+        return getOnlyProductList(deliveryUserProductMappers);
+    }
+
     private List<DeliveryUserProductMapper> getOnlyProductList(List<DeliveryUserProductMapper> deliveryUserProductMappers) {
         List<DeliveryUserProductMapper> deliveryUserProductMapperList = new ArrayList<>();
         Map<Long, DeliveryUserProductMapper> deliveryUserProductMapperMap = new HashMap<>();

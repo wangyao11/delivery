@@ -2,6 +2,7 @@ spring:
   datasource:
     username: root
     password: root
+#    password: root1234!@#$
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/db_delivery?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
   jackson:
@@ -11,7 +12,7 @@ logging:
     root: info
 
 image:
-  path: F:\data\images
+  path: /data/images
   type: png,jpg,jpeg
   size: 2097152
   scaleRatio: 0.20f

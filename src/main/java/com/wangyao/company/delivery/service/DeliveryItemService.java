@@ -21,4 +21,8 @@ public class DeliveryItemService{
     public List<DeliveryItem> list(DeliveryForm deliveryForm){
         return deliveryItemDao.listByDateTimeOrderByDateTime(deliveryForm);
     }
+
+    public List<DeliveryItem> oldList(DeliveryForm deliveryForm){
+        return deliveryItemDao.listByDateTimeOrderByDateTimeDesc(deliveryForm);
+    }
 }

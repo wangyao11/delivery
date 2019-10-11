@@ -67,6 +67,9 @@
           <if test="userId != null">
             and userId=#{userId,jdbcType=BIGINT}
           </if>
+          <if test="deliveryItemId != null">
+            and deliveryItemId = #{deliveryItemId}
+          </if>
           <if test="deliveryItemIds != null and deliveryItemIds.size() != 0 != null">
             AND deliveryItemId in
             <foreach collection="deliveryItemIds" item="delivery" open="(" separator="," close=")">

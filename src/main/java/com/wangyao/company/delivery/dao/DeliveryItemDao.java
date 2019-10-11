@@ -53,6 +53,10 @@ public class DeliveryItemDao {
         return deliveryItemMapper.listByDateTimeOrderByDateTime(deliveryForm);
     }
 
+    public List<DeliveryItem> listByDateTimeOrderByDateTimeDesc(DeliveryForm deliveryForm) {
+        return deliveryItemMapper.listByDateTimeOrderByDateTimeDesc(deliveryForm);
+    }
+
     public DeliveryItem getByDateTime(String dateTime) {
         return deliveryItemMapper.getByDateTime(dateTime);
     }

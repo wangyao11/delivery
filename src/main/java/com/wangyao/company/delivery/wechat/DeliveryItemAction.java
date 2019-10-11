@@ -33,9 +33,20 @@ public class DeliveryItemAction {
     @RequestMapping(value = "list", method = RequestMethod.POST)
     @ApiOperation(value = "查询配送单", notes = "查询配送单")
     ResponseEntity<List<DeliveryItem>> list(
-            @ApiParam(value = "查询所有用户", name = "pageParam") @RequestBody DeliveryForm deliveryForm
+            @ApiParam(value = "参数", name = "pageParam") @RequestBody DeliveryForm deliveryForm
     ) {
         List<DeliveryItem> deliveryItems = deliveryItemService.list(deliveryForm);
+        ResponseEntity<List<DeliveryItem>> deliveryItemResponseEntity = new ResponseEntity<>();
+        deliveryItemResponseEntity.setValue(deliveryItems);
+        return deliveryItemResponseEntity;
+    }
+
+    @RequestMapping(value = "oldList", method = RequestMethod.POST)
+    @ApiOperation(value = "查询历史订单", notes = "查询历史订单")
+    ResponseEntity<List<DeliveryItem>> oldList(
+            @ApiParam(value = "查询所有用户", name = "pageParam") @RequestBody DeliveryForm deliveryForm
+    ) {
+        List<DeliveryItem> deliveryItems = deliveryItemService.oldList(deliveryForm);
         ResponseEntity<List<DeliveryItem>> deliveryItemResponseEntity = new ResponseEntity<>();
         deliveryItemResponseEntity.setValue(deliveryItems);
         return deliveryItemResponseEntity;

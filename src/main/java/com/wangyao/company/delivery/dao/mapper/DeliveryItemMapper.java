@@ -26,5 +26,7 @@ public interface DeliveryItemMapper {
 
     List<DeliveryItem> listByDateTimeOrderByDateTime(DeliveryForm deliveryForm);
 
+    List<DeliveryItem> listByDateTimeOrderByDateTimeDesc(DeliveryForm deliveryForm);
+
     DeliveryItem getByDateTime(@Param("dateTime") String dateTime);
 }

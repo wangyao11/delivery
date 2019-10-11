@@ -42,6 +42,15 @@ public class DeliveryUserProductWeChatAction {
         return listResponseEntity;
     }
 
+    @RequestMapping(value = "listByDeviceItemId", method = RequestMethod.POST)
+    @ApiOperation(value = "查询配送单详情通过配送单Id", notes = "查询配送单详情通过配送单Id")
+    public ResponseEntity<List<DeliveryUserProductMapper>> listByDeviceItemId(@RequestBody DeliveryUserProductForm deliveryUserProductForm) {
+        List<DeliveryUserProductMapper> deliveryUserProductMappers = deliveryUserProductMapperService.listByDeviceItemId(deliveryUserProductForm);
+        ResponseEntity<List<DeliveryUserProductMapper>> listResponseEntity = new ResponseEntity<>();
+        listResponseEntity.setValue(deliveryUserProductMappers);
+        return listResponseEntity;
+    }
+
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ApiOperation(value = "add", notes = "添加或删除商品进入配送单")
     public ResponseEntity add(@RequestBody DeliveryUserProductAddForm deliveryUserProductAddForm) {
