@@ -22,4 +22,6 @@ public class ProductForm {
 
     @ApiModelProperty("商品名称")
     private String name;
+
+    private Integer states;
 }

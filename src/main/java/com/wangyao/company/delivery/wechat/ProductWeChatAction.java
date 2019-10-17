@@ -17,6 +17,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,7 +61,7 @@ public class ProductWeChatAction {
             @ApiParam(value = "查询所有商品", name = "pageParam") @RequestBody ProductDeliveryForm productDeliveryForm
     ) {
         ValidationUtils.validate(productDeliveryForm);
-        List<Product> productList = productDao.listByForm(new ProductForm());
+        List<Product> productList = productDao.listByForm(ProductForm.builder().states(0).build());
 
         List<ProductVO> productVOS = productList.stream().map(product -> {
             ProductVO productVO = new ProductVO();

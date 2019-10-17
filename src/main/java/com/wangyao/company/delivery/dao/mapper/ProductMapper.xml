@@ -146,6 +146,9 @@
           <if test="name != null and name != ''">
             and name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
           </if>
+          <if test="states != null">
+            and states = #{states,jdbcType=INTEGER}
+          </if>
         </where>
         order by createTime DESC
     </select>

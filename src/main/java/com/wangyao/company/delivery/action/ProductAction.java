@@ -6,6 +6,7 @@ import com.wangyao.company.delivery.exception.BusinessException;
 import com.wangyao.company.delivery.form.ProductAddForm;
 import com.wangyao.company.delivery.form.ProductForm;
 import com.wangyao.company.delivery.form.ProductUpdateForm;
+import com.wangyao.company.delivery.form.ProductUpdateStatesForm;
 import com.wangyao.company.delivery.model.Product;
 import com.wangyao.company.delivery.util.ValidationUtils;
 import io.swagger.annotations.Api;
@@ -78,6 +79,17 @@ public class ProductAction {
                 .remark(productUpdateForm.getRemark())
                 .type(productUpdateForm.getType())
                 .imageUrl(productUpdateForm.getImageUrl())
+                .build());
+        return new ResponseEntity();
+    }
+
+    @RequestMapping(value = "updateStatesById", method = RequestMethod.POST)
+    @ApiOperation(value = "修改商品状态", notes = "修改商品状态")
+    ResponseEntity updateStatesById(@RequestBody ProductUpdateStatesForm productUpdateForm) throws BusinessException {
+        ValidationUtils.validate(productUpdateForm);
+        productDao.updateById(Product.builder()
+                .id(productUpdateForm.getId())
+                .states(productUpdateForm.getStates())
                 .build());
         return new ResponseEntity();
     }

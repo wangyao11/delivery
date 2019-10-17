@@ -10,6 +10,7 @@ import com.wangyao.company.delivery.model.DeliveryItem;
 import com.wangyao.company.delivery.model.DeliveryUserProductMapper;
 import com.wangyao.company.delivery.model.DeliveryUserProductParam;
 import com.wangyao.company.delivery.service.DeliveryUserProductMapperService;
+import com.wangyao.company.delivery.util.ValidationUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -56,9 +57,13 @@ public class DeliveryUserProductAction {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ApiOperation(value = "add", notes = "添加商品进入配送单")
     public ResponseEntity add(@RequestBody DeliveryUserProductAddForm deliveryUserProductAddForm){
+        ValidationUtils.validate(deliveryUserProductAddForm);
+        if(deliveryUserProductAddForm.getCount() <= 0) {
+            throw new BusinessException("请输入产品数量!");
+        }
         DeliveryItem deliveryItem = deliveryItemDao.getByDateTime(deliveryUserProductAddForm.getDateTime());
         if (Objects.isNull(deliveryItem)) {
-            throw new BusinessException("商品配送单不存在!");
+            throw new BusinessException("产品配送单不存在!");
         }
         DeliveryUserProductMapper deliveryUserProductMapper = deliveryUserProductMapperDao.getByUserIdAndProductIdAndDeliveryItemId(DeliveryUserProductParam.builder()
                 .userId(deliveryUserProductAddForm.getUserId())
@@ -72,7 +77,7 @@ public class DeliveryUserProductAction {
                     .deliveryItemId(deliveryItem.getId())
                     .totalCount(deliveryUserProductAddForm.getCount()).build());
         } else {
-            deliveryUserProductMapper.setTotalCount(deliveryUserProductMapper.getTotalCount() + deliveryUserProductAddForm.getCount());
+            deliveryUserProductMapper.setTotalCount(deliveryUserProductAddForm.getCount());
             deliveryUserProductMapperDao.updateByPrimaryKeySelective(deliveryUserProductMapper);
         }
         return new ResponseEntity();

@@ -48,7 +48,7 @@ public class Product {
     /**
     * 状态:0-上架,1-下架
     */
-    private Byte states;
+    private Integer states;
 
     /**
     * 商品类型 0-斤 1-袋 2-瓶 3-桶 4-包
