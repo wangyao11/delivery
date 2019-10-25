@@ -39,6 +39,11 @@ public class Product {
     private Long classId;
 
     /**
+     * 0 - 干货 1- 生鲜
+     */
+    private Integer classType;
+
+    /**
     * 备注
     */
     private String remark;

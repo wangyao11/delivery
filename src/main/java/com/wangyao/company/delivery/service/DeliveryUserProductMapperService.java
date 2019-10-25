@@ -35,6 +35,9 @@ public class DeliveryUserProductMapperService{
         if(Objects.nonNull(deliveryUserProductForm.getUserId())) {
             deliveryUserProductParam.setUserId(deliveryUserProductForm.getUserId());
         }
+        if(Objects.nonNull(deliveryUserProductForm.getClassType())) {
+            deliveryUserProductParam.setClassType(deliveryUserProductForm.getClassType());
+        }
         if(Objects.nonNull(deliveryUserProductForm.getStartTime()) && Objects.isNull(deliveryUserProductForm.getEndTime())) {
             List<DeliveryItem> deliveryItems = deliveryItemDao.listByDateTimeOrderByDateTime(DeliveryForm.builder().startTime(deliveryUserProductForm.getStartTime()).endTime(deliveryUserProductForm.getStartTime()).build());
             deliveryItemIds = deliveryItems.stream().map(DeliveryItem::getId).collect(Collectors.toList());

@@ -25,12 +25,12 @@ public class ProductDao {
         return productMapper.deleteByPrimaryKey(id);
     }
 
-    
+
     public int insert(Product record) {
         return productMapper.insert(record);
     }
 
-    
+
     public int insertSelective(Product record) {
         return productMapper.insertSelective(record);
     }
@@ -47,6 +47,10 @@ public class ProductDao {
 
     public List<Product> listByForm(ProductForm productForm){
         return productMapper.listByForm(productForm);
+    }
+
+    public List<Product> listByFormOrderByCreateTime(ProductForm productForm) {
+        return productMapper.listByFormOrderByCreateTime(productForm);
     }
 
     public int countByName(String name) {

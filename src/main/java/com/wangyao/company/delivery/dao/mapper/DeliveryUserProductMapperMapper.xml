@@ -76,6 +76,9 @@
               #{delivery}
             </foreach>
           </if>
+          <if test="classType != null">
+            AND tp.classType = #{classType}
+          </if>
         </where>
         order by tp.classId
     </select>

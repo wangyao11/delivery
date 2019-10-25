@@ -21,4 +21,5 @@ public class DeliveryUserProductParam {
     private List<Long> deliveryItemIds;
     private Long productId;
     private Long deliveryItemId;
+    private Long classType;
 }

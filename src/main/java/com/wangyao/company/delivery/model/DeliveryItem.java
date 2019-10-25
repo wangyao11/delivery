@@ -39,6 +39,8 @@ public class DeliveryItem {
     */
     private String remark;
 
+    private Integer productCount;
+
     /**
     * 记录创建时间
     */

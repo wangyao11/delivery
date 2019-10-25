@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -32,10 +33,10 @@ public class DeliveryItemAction {
 
     @RequestMapping(value = "list", method = RequestMethod.POST)
     @ApiOperation(value = "查询配送单", notes = "查询配送单")
-    ResponseEntity<List<DeliveryItem>> list(
+    ResponseEntity<List<DeliveryItem>> list(HttpServletRequest request,
             @ApiParam(value = "参数", name = "pageParam") @RequestBody DeliveryForm deliveryForm
     ) {
-        List<DeliveryItem> deliveryItems = deliveryItemService.list(deliveryForm);
+        List<DeliveryItem> deliveryItems = deliveryItemService.list(request,deliveryForm);
         ResponseEntity<List<DeliveryItem>> deliveryItemResponseEntity = new ResponseEntity<>();
         deliveryItemResponseEntity.setValue(deliveryItems);
         return deliveryItemResponseEntity;
@@ -43,10 +44,10 @@ public class DeliveryItemAction {
 
     @RequestMapping(value = "oldList", method = RequestMethod.POST)
     @ApiOperation(value = "查询历史订单", notes = "查询历史订单")
-    ResponseEntity<List<DeliveryItem>> oldList(
+    ResponseEntity<List<DeliveryItem>> oldList(HttpServletRequest request,
             @ApiParam(value = "查询所有用户", name = "pageParam") @RequestBody DeliveryForm deliveryForm
     ) {
-        List<DeliveryItem> deliveryItems = deliveryItemService.oldList(deliveryForm);
+        List<DeliveryItem> deliveryItems = deliveryItemService.oldList(request, deliveryForm);
         ResponseEntity<List<DeliveryItem>> deliveryItemResponseEntity = new ResponseEntity<>();
         deliveryItemResponseEntity.setValue(deliveryItems);
         return deliveryItemResponseEntity;

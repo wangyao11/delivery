@@ -22,4 +22,5 @@ public class DeliveryUserProductForm {
     private String startTime;
     private String endTime;
     private Long deliveryItemId;
+    private Long classType;
 }

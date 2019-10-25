@@ -23,6 +23,8 @@ public interface ProductMapper {
 
     List<Product> listByForm(ProductForm productForm);
 
+    List<Product> listByFormOrderByCreateTime(ProductForm productForm);
+
     int countByName(@Param("name")String name);
 
 }

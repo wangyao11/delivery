@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * @Author wy
@@ -32,23 +33,24 @@ public class SecurityInterceptor implements HandlerInterceptor {
         log.info("token" + token);
         // 未登录的请求拦截
         if (StringUtils.isEmpty(token) || "null".equals(token)) {
-            httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "未登录");
+            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "未登录");
             return false;
         }
 
         TokenVO resultMap = JwtUtil.validToken(token);
         // token认证失败的请求验证
         if(resultMap.getState() == TokenStatus.INVALID.getValue()){
-            httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "用户认证失败");
+            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "用户认证失败");
             return false;
         }
 
         // token 超时
         if(resultMap.getState() ==  TokenStatus.EXPIRED.getValue()){
-            httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "登录时间超时,请重新登录");
+            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "登录时间超时,请重新登录");
             return false;
         }
-
+        Map<String, Object> userMap = (Map<String, Object>)resultMap.getCondition();
+        httpServletRequest.setAttribute("userId", userMap.get("userId"));
         return true;
     }
 

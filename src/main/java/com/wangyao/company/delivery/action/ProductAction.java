@@ -40,7 +40,7 @@ public class ProductAction {
             @ApiParam(value = "查询所有商品", name = "pageParam") @RequestBody ProductForm productForm
     ) {
 
-        List<Product> productList = productDao.listByForm(productForm);
+        List<Product> productList = productDao.listByFormOrderByCreateTime(productForm);
 
         ResponseEntity<List<Product>> responseEntityBuilder = new ResponseEntity<>();
         responseEntityBuilder.setValue(productList);
@@ -58,6 +58,8 @@ public class ProductAction {
                     .classId(productAddForm.getClassId())
                     .remark(productAddForm.getRemark())
                     .price(productAddForm.getPrice())
+                    .sort(productAddForm.getSort())
+                    .classType(productAddForm.getClassType())
                     .type(productAddForm.getType())
                     .imageUrl(productAddForm.getImageUrl())
                     .build());
@@ -76,6 +78,8 @@ public class ProductAction {
                 .name(productUpdateForm.getName())
                 .classId(productUpdateForm.getClassId())
                 .price(productUpdateForm.getPrice())
+                .sort(productUpdateForm.getSort())
+                .classType(productUpdateForm.getClassType())
                 .remark(productUpdateForm.getRemark())
                 .type(productUpdateForm.getType())
                 .imageUrl(productUpdateForm.getImageUrl())
