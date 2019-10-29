@@ -53,6 +53,8 @@ public class User {
     */
     private String address;
 
+    private String number;
+
     /**
     * 记录创建时间
     */

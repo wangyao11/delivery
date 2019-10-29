@@ -3,8 +3,11 @@ package com.wangyao.company.delivery.action;
 import com.wangyao.company.delivery.PageResult;
 import com.wangyao.company.delivery.ResponseEntity;
 import com.wangyao.company.delivery.exception.BusinessException;
+import com.wangyao.company.delivery.form.ProductUpdateForm;
 import com.wangyao.company.delivery.form.UserAddForm;
 import com.wangyao.company.delivery.form.UserForm;
+import com.wangyao.company.delivery.form.UserUpdateForm;
+import com.wangyao.company.delivery.model.Product;
 import com.wangyao.company.delivery.model.User;
 import com.wangyao.company.delivery.service.UserService;
 import com.wangyao.company.delivery.util.Md5Util;
@@ -61,15 +64,31 @@ public class UserAction {
         int isHas = userService.countByName(userAddForm.getName());
         if (0 == isHa && 0 == isHas) {
             userService.add(User.builder()
-            .account(userAddForm.getAccount())
-            .address(userAddForm.getAddress())
-            .name(userAddForm.getName())
-            .password(Md5Util.md5Password(userAddForm.getPassword()))
-            .remark(userAddForm.getRemark())
-            .states(0).build());
+                    .account(userAddForm.getAccount())
+                    .address(userAddForm.getAddress())
+                    .name(userAddForm.getName())
+                    .number(userAddForm.getNumber())
+                    .password(Md5Util.md5Password(userAddForm.getPassword()))
+                    .remark(userAddForm.getRemark())
+                    .states(0).build());
         } else {
             throw new BusinessException("添加失败,该学校已存在");
         }
+        return new ResponseEntity();
+    }
+
+    @RequestMapping(value = "updateById", method = RequestMethod.POST)
+    @ApiOperation(value = "修改学校信息", notes = "修改学校信息")
+    ResponseEntity updateById(@RequestBody UserUpdateForm userUpdateForm) throws BusinessException {
+        ValidationUtils.validate(userUpdateForm);
+        userService.updateById(User.builder()
+                .id(userUpdateForm.getId())
+                .name(userUpdateForm.getName())
+                .account(userUpdateForm.getAccount())
+                .number(userUpdateForm.getNumber())
+                .remark(userUpdateForm.getRemark())
+                .address(userUpdateForm.getAddress())
+                .build());
         return new ResponseEntity();
     }
 }

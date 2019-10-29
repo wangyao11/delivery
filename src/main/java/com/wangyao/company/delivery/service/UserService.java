@@ -38,4 +38,8 @@ public class UserService {
     public int add(User user){
         return userDao.insert(user);
     }
+
+    public int updateById(User user){
+        return userDao.updateByPrimaryKeySelective(user);
+    }
 }
