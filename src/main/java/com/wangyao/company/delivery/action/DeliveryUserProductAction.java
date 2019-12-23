@@ -1,11 +1,15 @@
 package com.wangyao.company.delivery.action;
 
 import com.wangyao.company.delivery.ResponseEntity;
+import com.wangyao.company.delivery.dao.DeliveryDayItemDao;
 import com.wangyao.company.delivery.dao.DeliveryItemDao;
 import com.wangyao.company.delivery.dao.DeliveryUserProductMapperDao;
 import com.wangyao.company.delivery.exception.BusinessException;
+import com.wangyao.company.delivery.form.DeliverySaveItemForm;
 import com.wangyao.company.delivery.form.DeliveryUserProductAddForm;
 import com.wangyao.company.delivery.form.DeliveryUserProductForm;
+import com.wangyao.company.delivery.form.DeliveryUserProductSaveForm;
+import com.wangyao.company.delivery.model.DeliveryDayItem;
 import com.wangyao.company.delivery.model.DeliveryItem;
 import com.wangyao.company.delivery.model.DeliveryUserProductMapper;
 import com.wangyao.company.delivery.model.DeliveryUserProductParam;
@@ -14,9 +18,11 @@ import com.wangyao.company.delivery.util.ValidationUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +43,8 @@ public class DeliveryUserProductAction {
     private DeliveryUserProductMapperDao deliveryUserProductMapperDao;
     @Resource
     private DeliveryItemDao deliveryItemDao;
+    @Resource
+    private DeliveryDayItemDao deliveryDayItemDao;
 
     @RequestMapping(value = "list", method = RequestMethod.POST)
     @ApiOperation(value = "查询配送单详情", notes = "查询用户某一天的配送单详情")
@@ -82,4 +90,59 @@ public class DeliveryUserProductAction {
         }
         return new ResponseEntity();
     }
+
+    @RequestMapping(value = "saveDelivery", method = RequestMethod.POST)
+    @ApiOperation(value = "saveDelivery", notes = "保存配送单")
+    public ResponseEntity saveDelivery(@RequestBody DeliveryUserProductSaveForm deliveryUserProductSaveForm){
+        List<DeliveryDayItem> deliveryDayItems = new ArrayList<>();
+        ValidationUtils.validate(deliveryUserProductSaveForm);
+        Long userId = deliveryUserProductSaveForm.getUserId();
+        DeliveryItem deliveryItem = deliveryItemDao.getByDateTime(deliveryUserProductSaveForm.getDateTime());
+        if (Objects.isNull(deliveryItem)) {
+            throw new BusinessException("产品配送单不存在!");
+        }
+        Long deliveryItemId = deliveryItem.getId();
+        if(CollectionUtils.isEmpty(deliveryUserProductSaveForm.getValues())) {
+            throw new BusinessException("保存失败，商品列表不能为空");
+        }
+
+        List<DeliverySaveItemForm> deliverySaveItemForms = deliveryUserProductSaveForm.getValues();
+        for (DeliverySaveItemForm deliverySaveItemForm : deliverySaveItemForms) {
+            Long productId = deliverySaveItemForm.getProductId();
+            DeliveryDayItem deliveryDayItemMap = deliveryDayItemDao.getByUserIdAndProductIdAndDeliveryItemId(userId, productId, deliveryItemId);
+            if(deliveryDayItemMap != null) {
+                deliveryDayItemDao.deleteById(deliveryDayItemMap.getId());
+            }
+            DeliveryDayItem deliveryDayItem = DeliveryDayItem.builder()
+                    .deliveryItemId(deliveryItemId)
+                    .productId(productId)
+                    .userId(userId)
+                    .totalCount(deliverySaveItemForm.getTotalCount())
+                    .totalPrice(new Double(deliverySaveItemForm.getTotalPrice()*100).intValue())
+                    .build();
+            deliveryDayItems.add(deliveryDayItem);
+        }
+
+        deliveryDayItemDao.insertList(deliveryDayItems);
+        return new ResponseEntity();
+    }
+
+    @RequestMapping(value = "isSaveDelivery", method = RequestMethod.POST)
+    @ApiOperation(value = "isSaveDelivery", notes = "是否保存配送单，true 保存 false 未保存")
+    public ResponseEntity<Boolean> isSaveDelivery(@RequestBody DeliveryUserProductSaveForm deliveryUserProductSaveForm){
+        ValidationUtils.validate(deliveryUserProductSaveForm);
+        Long userId = deliveryUserProductSaveForm.getUserId();
+        DeliveryItem deliveryItem = deliveryItemDao.getByDateTime(deliveryUserProductSaveForm.getDateTime());
+        if (Objects.isNull(deliveryItem)) {
+            throw new BusinessException("产品配送单不存在!");
+        }
+        Long deliveryItemId = deliveryItem.getId();
+        List<DeliveryDayItem> deliveryDayItems = deliveryDayItemDao.getByUserIdAndDeliveryItemId(userId, deliveryItemId);
+        Boolean isSave = true;
+        if (CollectionUtils.isEmpty(deliveryDayItems)) {
+            isSave = false;
+        }
+        return new ResponseEntity<>(isSave);
+    }
+
 }

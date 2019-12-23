@@ -11,6 +11,7 @@ CREATE TABLE tb_user
   password varchar(50) NOT NULL COMMENT '密码',
   states tinyint(4) NOT NULL COMMENT '状态:0-启用,1-禁用',
   remark varchar(100) DEFAULT NULL COMMENT '用户备注',
+  number varchar(50) DEFAULT NULL COMMENT '用户序号',
   address varchar(100) DEFAULT NULL COMMENT '用户地址',
   createTime datetime DEFAULT NULL COMMENT '记录创建时间',
   updateTime datetime DEFAULT NULL COMMENT '记录更新时间',
@@ -89,6 +90,20 @@ CREATE TABLE tb_delivery_user_product_mapper
   userId bigint(20) NOT NULL COMMENT '用户',
   productId bigint(20) NOT NULL COMMENT '产品ID',
   totalCount int NOT NULL DEFAULT 0 COMMENT '产品数量',
+  createTime datetime DEFAULT NULL COMMENT '记录创建时间',
+  updateTime datetime DEFAULT NULL COMMENT '记录更新时间',
+  PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 配送单详情
+CREATE TABLE tb_delivery_day_item
+(
+  id bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  deliveryItemId bigint(20) NOT NULL COMMENT '配送单Id',
+  userId bigint(20) NOT NULL COMMENT '用户',
+  productId bigint(20) NOT NULL COMMENT '产品ID',
+  totalCount int NOT NULL DEFAULT 0 COMMENT '产品数量',
+  totalPrice int NOT NULL DEFAULT 0 COMMENT '产品总价',
   createTime datetime DEFAULT NULL COMMENT '记录创建时间',
   updateTime datetime DEFAULT NULL COMMENT '记录更新时间',
   PRIMARY KEY (id)

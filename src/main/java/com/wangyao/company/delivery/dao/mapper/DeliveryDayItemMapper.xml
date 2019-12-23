@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangyao.company.delivery.dao.mapper.DeliveryDayItemMapper">
+  <resultMap id="BaseResultMap" type="com.wangyao.company.delivery.model.DeliveryDayItem">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="deliveryItemId" jdbcType="BIGINT" property="deliveryItemId" />
+    <result column="userId" jdbcType="BIGINT" property="userId" />
+    <result column="productId" jdbcType="BIGINT" property="productId" />
+    <result column="totalCount" jdbcType="INTEGER" property="totalCount" />
+    <result column="totalPrice" jdbcType="INTEGER" property="totalPrice" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, deliveryItemId, userId, productId, totalCount, totalPrice, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_delivery_day_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from tb_delivery_day_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.DeliveryDayItem" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_delivery_day_item (deliveryItemId, userId, productId, 
+      totalCount, totalPrice, createTime, 
+      updateTime)
+    values (#{deliveryItemId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
+      #{totalCount,jdbcType=INTEGER}, #{totalPrice,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.wangyao.company.delivery.model.DeliveryDayItem" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_delivery_day_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deliveryItemId != null">
+        deliveryItemId,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="productId != null">
+        productId,
+      </if>
+      <if test="totalCount != null">
+        totalCount,
+      </if>
+      <if test="totalPrice != null">
+        totalPrice,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deliveryItemId != null">
+        #{deliveryItemId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="totalCount != null">
+        #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wangyao.company.delivery.model.DeliveryDayItem">
+    <!--@mbg.generated-->
+    update tb_delivery_day_item
+    <set>
+      <if test="deliveryItemId != null">
+        deliveryItemId = #{deliveryItemId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        productId = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="totalCount != null">
+        totalCount = #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null">
+        totalPrice = #{totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wangyao.company.delivery.model.DeliveryDayItem">
+    <!--@mbg.generated-->
+    update tb_delivery_day_item
+    set deliveryItemId = #{deliveryItemId,jdbcType=BIGINT},
+      userId = #{userId,jdbcType=BIGINT},
+      productId = #{productId,jdbcType=BIGINT},
+      totalCount = #{totalCount,jdbcType=INTEGER},
+      totalPrice = #{totalPrice,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="listByUserIdAndDate" resultType="com.wangyao.company.delivery.vo.DeliveryDayTotalVO" parameterType="com.wangyao.company.delivery.form.DeliveryDayTotalForm">
+    SELECT
+      tp.`name` productName,
+      tp.type productType,
+      SUM(totalCount) totalCount,
+      SUM(totalPrice) totalPrice
+    FROM
+    tb_delivery_day_item tddi
+    LEFT JOIN tb_product tp ON tp.id = tddi.productId
+    LEFT JOIN tb_user tu ON tu.id = tddi.userId
+    LEFT JOIN tb_delivery_item tdi ON tdi.id = tddi.deliveryItemId
+    <where>
+      <if test="startTime != null">
+        <![CDATA[ tdi.dateTime >= #{startTime,jdbcType=VARCHAR} ]]>
+        <![CDATA[ and tdi.dateTime <= #{endTime,jdbcType=VARCHAR} ]]>
+      </if>
+      <if test="userId != null">
+        AND tddi.userId = #{userId,jdbcType=BIGINT}
+      </if>
+      <if test="classType != null">
+        AND tp.classType = #{classType,jdbcType=INTEGER}
+      </if>
+    </where>
+    GROUP BY
+      tddi.productId;
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2019-12-22-->
+  <insert id="insertList" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO tb_delivery_day_item(
+    deliveryItemId,
+    userId,
+    productId,
+    totalCount,
+    totalPrice,
+    createTime,
+    updateTime
+    )VALUES
+    <foreach collection="list" item="element" index="index" separator=",">
+      (
+      #{element.deliveryItemId,jdbcType=BIGINT},
+      #{element.userId,jdbcType=BIGINT},
+      #{element.productId,jdbcType=BIGINT},
+      #{element.totalCount,jdbcType=INTEGER},
+      #{element.totalPrice,jdbcType=INTEGER},
+      now(),
+      now()
+      )
+    </foreach>
+  </insert>
+
+<!--auto generated by MybatisCodeHelper on 2019-12-22-->
+  <select id="getByUserIdAndProductIdAndDeliveryItemId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from tb_delivery_day_item
+    where userId=#{userId,jdbcType=BIGINT} and productId=#{productId,jdbcType=BIGINT} and
+    deliveryItemId=#{deliveryItemId,jdbcType=BIGINT} limit 1
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2019-12-23-->
+  <select id="getByUserIdAndDeliveryItemId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from tb_delivery_day_item
+    where userId=#{userId,jdbcType=BIGINT} and deliveryItemId=#{deliveryItemId,jdbcType=BIGINT}
+  </select>
+</mapper>

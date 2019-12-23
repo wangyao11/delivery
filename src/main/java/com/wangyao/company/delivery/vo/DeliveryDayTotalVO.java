@@ -1,30 +1,23 @@
 package com.wangyao.company.delivery.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 /**
  * @author wy
- * @date 2019/9/4 0004
+ * @date 2019/12/21 0021
  * @description:
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductVO {
-    /**
-    * 产品销量
-    */
-    private int count;
-
-    /**
-    * 产品名称
-    */
+public class DeliveryDayTotalVO {
     private String productName;
+    private String productType;
+    private Integer totalCount;
+    private Integer totalPrice;
 }
