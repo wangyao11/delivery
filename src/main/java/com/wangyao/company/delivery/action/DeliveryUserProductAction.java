@@ -18,6 +18,7 @@ import com.wangyao.company.delivery.util.ValidationUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -106,6 +107,7 @@ public class DeliveryUserProductAction {
             throw new BusinessException("保存失败，商品列表不能为空");
         }
 
+        deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId);
         List<DeliverySaveItemForm> deliverySaveItemForms = deliveryUserProductSaveForm.getValues();
         for (DeliverySaveItemForm deliverySaveItemForm : deliverySaveItemForms) {
             Long productId = deliverySaveItemForm.getProductId();

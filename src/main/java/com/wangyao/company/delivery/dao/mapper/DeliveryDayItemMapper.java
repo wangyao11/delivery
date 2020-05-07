@@ -33,5 +33,6 @@ public interface DeliveryDayItemMapper {
 
     List<DeliveryDayItem> getByUserIdAndDeliveryItemId(@Param("userId")Long userId,@Param("deliveryItemId")Long deliveryItemId);
 
+    int deleteByDeliveryItemId(Long deliveryItemId);
 
 }

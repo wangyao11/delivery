@@ -36,6 +36,10 @@ public class DeliveryDayItemDao {
         return deliveryDayItemMapper.getByUserIdAndDeliveryItemId(userId, deliveryItemId);
     }
 
+    public int deleteBydeliveryItemId(Long deliveryItemId) {
+        return deliveryDayItemMapper.deleteByDeliveryItemId(deliveryItemId);
+    }
+
     public int deleteById(Long id) {
         return deliveryDayItemMapper.deleteById(id);
     }

@@ -195,4 +195,10 @@
     from tb_delivery_day_item
     where userId=#{userId,jdbcType=BIGINT} and deliveryItemId=#{deliveryItemId,jdbcType=BIGINT}
   </select>
+
+  <delete id="deleteByDeliveryItemId" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from tb_delivery_day_item
+    where deliveryItemId = #{deliveryItemId,jdbcType=BIGINT}
+  </delete>
 </mapper>
