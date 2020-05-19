@@ -4,15 +4,13 @@ import com.wangyao.company.delivery.ResponseEntity;
 import com.wangyao.company.delivery.dao.DeliveryDayItemDao;
 import com.wangyao.company.delivery.dao.DeliveryItemDao;
 import com.wangyao.company.delivery.dao.DeliveryUserProductMapperDao;
+import com.wangyao.company.delivery.dao.ProductDao;
 import com.wangyao.company.delivery.exception.BusinessException;
 import com.wangyao.company.delivery.form.DeliverySaveItemForm;
 import com.wangyao.company.delivery.form.DeliveryUserProductAddForm;
 import com.wangyao.company.delivery.form.DeliveryUserProductForm;
 import com.wangyao.company.delivery.form.DeliveryUserProductSaveForm;
-import com.wangyao.company.delivery.model.DeliveryDayItem;
-import com.wangyao.company.delivery.model.DeliveryItem;
-import com.wangyao.company.delivery.model.DeliveryUserProductMapper;
-import com.wangyao.company.delivery.model.DeliveryUserProductParam;
+import com.wangyao.company.delivery.model.*;
 import com.wangyao.company.delivery.service.DeliveryUserProductMapperService;
 import com.wangyao.company.delivery.util.ValidationUtils;
 import io.swagger.annotations.Api;
@@ -46,6 +44,8 @@ public class DeliveryUserProductAction {
     private DeliveryItemDao deliveryItemDao;
     @Resource
     private DeliveryDayItemDao deliveryDayItemDao;
+    @Resource
+    private ProductDao productDao;
 
     @RequestMapping(value = "list", method = RequestMethod.POST)
     @ApiOperation(value = "查询配送单详情", notes = "查询用户某一天的配送单详情")
@@ -107,8 +107,15 @@ public class DeliveryUserProductAction {
             throw new BusinessException("保存失败，商品列表不能为空");
         }
 
-        deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId);
+
         List<DeliverySaveItemForm> deliverySaveItemForms = deliveryUserProductSaveForm.getValues();
+        if(deliverySaveItemForms.size() > 0) {
+            DeliverySaveItemForm deliverySaveItem = deliverySaveItemForms.get(0);
+            Long productId = deliverySaveItem.getProductId();
+            Product product = productDao.selectByPrimaryKey(productId);
+            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, product.getClassType());
+        }
+
         for (DeliverySaveItemForm deliverySaveItemForm : deliverySaveItemForms) {
             Long productId = deliverySaveItemForm.getProductId();
             DeliveryDayItem deliveryDayItemMap = deliveryDayItemDao.getByUserIdAndProductIdAndDeliveryItemId(userId, productId, deliveryItemId);

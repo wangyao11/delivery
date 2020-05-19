@@ -1,4 +1,5 @@
 package com.wangyao.company.delivery.dao.mapper;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.wangyao.company.delivery.model.DeliveryDayItem;
@@ -19,7 +20,7 @@ public interface DeliveryDayItemMapper {
 
     int insertSelective(DeliveryDayItem record);
 
-    int insertList(@Param("list")List<DeliveryDayItem> list);
+    int insertList(@Param("list") List<DeliveryDayItem> list);
 
     DeliveryDayItem selectByPrimaryKey(Long id);
 
@@ -29,10 +30,10 @@ public interface DeliveryDayItemMapper {
 
     List<DeliveryDayTotalVO> listByUserIdAndDate(DeliveryDayTotalForm deliveryDayTotalForm);
 
-    DeliveryDayItem getByUserIdAndProductIdAndDeliveryItemId(@Param("userId")Long userId,@Param("productId")Long productId,@Param("deliveryItemId")Long deliveryItemId);
+    DeliveryDayItem getByUserIdAndProductIdAndDeliveryItemId(@Param("userId") Long userId, @Param("productId") Long productId, @Param("deliveryItemId") Long deliveryItemId);
 
-    List<DeliveryDayItem> getByUserIdAndDeliveryItemId(@Param("userId")Long userId,@Param("deliveryItemId")Long deliveryItemId);
+    List<DeliveryDayItem> getByUserIdAndDeliveryItemId(@Param("userId") Long userId, @Param("deliveryItemId") Long deliveryItemId);
 
-    int deleteByDeliveryItemId(Long deliveryItemId);
+    int deleteByDeliveryItemId(@Param("deliveryItemId") Long deliveryItemId,@Param("classType") Integer classType);
 
 }
