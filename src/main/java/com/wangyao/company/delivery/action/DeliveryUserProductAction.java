@@ -18,6 +18,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -109,11 +110,13 @@ public class DeliveryUserProductAction {
 
 
         List<DeliverySaveItemForm> deliverySaveItemForms = deliveryUserProductSaveForm.getValues();
-        if(deliverySaveItemForms.size() > 0) {
-            DeliverySaveItemForm deliverySaveItem = deliverySaveItemForms.get(0);
-            Long productId = deliverySaveItem.getProductId();
-            Product product = productDao.selectByPrimaryKey(productId);
-            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, product.getClassType());
+        if(StringUtils.isEmpty(deliveryUserProductSaveForm.getClassType())) {
+            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, 0);
+            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, 1);
+        } else if("0".equals(deliveryUserProductSaveForm.getClassType())) {
+            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, 0);
+        } else if("1".equals(deliveryUserProductSaveForm.getClassType())) {
+            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, 1);
         }
 
         for (DeliverySaveItemForm deliverySaveItemForm : deliverySaveItemForms) {

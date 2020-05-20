@@ -24,5 +24,6 @@ public class DeliveryUserProductSaveForm {
     private Long deliveryItemId;
     @ApiModelProperty("无法获取deliveryTtemId时使用时间")
     private String dateTime;
+    private String classType;
     private List<DeliverySaveItemForm> values;
 }
