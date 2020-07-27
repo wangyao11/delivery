@@ -66,9 +66,9 @@ public class DeliveryUserProductAction {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ApiOperation(value = "add", notes = "添加商品进入配送单")
-    public ResponseEntity add(@RequestBody DeliveryUserProductAddForm deliveryUserProductAddForm){
+    public ResponseEntity add(@RequestBody DeliveryUserProductAddForm deliveryUserProductAddForm) {
         ValidationUtils.validate(deliveryUserProductAddForm);
-        if(deliveryUserProductAddForm.getCount() <= 0) {
+        if (deliveryUserProductAddForm.getCount() <= 0) {
             throw new BusinessException("请输入产品数量!");
         }
         DeliveryItem deliveryItem = deliveryItemDao.getByDateTime(deliveryUserProductAddForm.getDateTime());
@@ -95,7 +95,7 @@ public class DeliveryUserProductAction {
 
     @RequestMapping(value = "saveDelivery", method = RequestMethod.POST)
     @ApiOperation(value = "saveDelivery", notes = "保存配送单")
-    public ResponseEntity saveDelivery(@RequestBody DeliveryUserProductSaveForm deliveryUserProductSaveForm){
+    public ResponseEntity saveDelivery(@RequestBody DeliveryUserProductSaveForm deliveryUserProductSaveForm) {
         List<DeliveryDayItem> deliveryDayItems = new ArrayList<>();
         ValidationUtils.validate(deliveryUserProductSaveForm);
         Long userId = deliveryUserProductSaveForm.getUserId();
@@ -104,25 +104,25 @@ public class DeliveryUserProductAction {
             throw new BusinessException("产品配送单不存在!");
         }
         Long deliveryItemId = deliveryItem.getId();
-        if(CollectionUtils.isEmpty(deliveryUserProductSaveForm.getValues())) {
+        if (CollectionUtils.isEmpty(deliveryUserProductSaveForm.getValues())) {
             throw new BusinessException("保存失败，商品列表不能为空");
         }
 
 
         List<DeliverySaveItemForm> deliverySaveItemForms = deliveryUserProductSaveForm.getValues();
-        if(StringUtils.isEmpty(deliveryUserProductSaveForm.getClassType())) {
-            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, 0);
-            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, 1);
-        } else if("0".equals(deliveryUserProductSaveForm.getClassType())) {
-            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, 0);
-        } else if("1".equals(deliveryUserProductSaveForm.getClassType())) {
-            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, 1);
+        if (StringUtils.isEmpty(deliveryUserProductSaveForm.getClassType())) {
+            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, deliveryUserProductSaveForm.getUserId(), 0);
+            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, deliveryUserProductSaveForm.getUserId(), 1);
+        } else if ("0".equals(deliveryUserProductSaveForm.getClassType())) {
+            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, deliveryUserProductSaveForm.getUserId(), 0);
+        } else if ("1".equals(deliveryUserProductSaveForm.getClassType())) {
+            deliveryDayItemDao.deleteBydeliveryItemId(deliveryItemId, deliveryUserProductSaveForm.getUserId(), 1);
         }
 
         for (DeliverySaveItemForm deliverySaveItemForm : deliverySaveItemForms) {
             Long productId = deliverySaveItemForm.getProductId();
             DeliveryDayItem deliveryDayItemMap = deliveryDayItemDao.getByUserIdAndProductIdAndDeliveryItemId(userId, productId, deliveryItemId);
-            if(deliveryDayItemMap != null) {
+            if (deliveryDayItemMap != null) {
                 deliveryDayItemDao.deleteById(deliveryDayItemMap.getId());
             }
             DeliveryDayItem deliveryDayItem = DeliveryDayItem.builder()
@@ -130,7 +130,7 @@ public class DeliveryUserProductAction {
                     .productId(productId)
                     .userId(userId)
                     .totalCount(deliverySaveItemForm.getTotalCount())
-                    .totalPrice(new Double(deliverySaveItemForm.getTotalPrice()*100).intValue())
+                    .totalPrice(new Double(deliverySaveItemForm.getTotalPrice() * 100).intValue())
                     .build();
             deliveryDayItems.add(deliveryDayItem);
         }
@@ -141,7 +141,7 @@ public class DeliveryUserProductAction {
 
     @RequestMapping(value = "isSaveDelivery", method = RequestMethod.POST)
     @ApiOperation(value = "isSaveDelivery", notes = "是否保存配送单，true 保存 false 未保存")
-    public ResponseEntity<Boolean> isSaveDelivery(@RequestBody DeliveryUserProductSaveForm deliveryUserProductSaveForm){
+    public ResponseEntity<Boolean> isSaveDelivery(@RequestBody DeliveryUserProductSaveForm deliveryUserProductSaveForm) {
         ValidationUtils.validate(deliveryUserProductSaveForm);
         Long userId = deliveryUserProductSaveForm.getUserId();
         DeliveryItem deliveryItem = deliveryItemDao.getByDateTime(deliveryUserProductSaveForm.getDateTime());

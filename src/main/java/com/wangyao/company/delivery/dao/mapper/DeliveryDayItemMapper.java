@@ -34,6 +34,6 @@ public interface DeliveryDayItemMapper {
 
     List<DeliveryDayItem> getByUserIdAndDeliveryItemId(@Param("userId") Long userId, @Param("deliveryItemId") Long deliveryItemId);
 
-    int deleteByDeliveryItemId(@Param("deliveryItemId") Long deliveryItemId,@Param("classType") Integer classType);
+    int deleteByDeliveryItemId(@Param("deliveryItemId") Long deliveryItemId,@Param("userId") Long userId, @Param("classType") Integer classType);
 
 }
