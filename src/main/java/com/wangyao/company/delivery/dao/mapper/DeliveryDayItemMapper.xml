@@ -132,6 +132,7 @@
     SELECT
       tp.`name` productName,
       tp.type productType,
+      tp.classType classType,
       SUM(totalCount) totalCount,
       SUM(totalPrice) totalPrice
     FROM

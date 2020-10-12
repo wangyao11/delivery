@@ -17,7 +17,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,7 +70,7 @@ public class ProductWeChatAction {
                     .deliveryItemId(productDeliveryForm.getDeliveryItemId())
                     .productId(product.getId()).build();
             DeliveryUserProductMapper deliveryUserProductMapper = deliveryUserProductMapperDao.getByUserIdAndProductIdAndDeliveryItemId(deliveryUserProductParam);
-            if(Objects.nonNull(deliveryUserProductMapper)) {
+            if (Objects.nonNull(deliveryUserProductMapper)) {
                 productVO.setCount(deliveryUserProductMapper.getTotalCount());
             }
             return productVO;

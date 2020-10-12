@@ -45,6 +45,8 @@ public class DeliveryUserProductMapper {
 
     private Float productPrice;
 
+    private Integer classType;
+
     /**
     * 产品数量
     */

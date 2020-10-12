@@ -160,7 +160,7 @@
             and states = #{states,jdbcType=INTEGER}
           </if>
         </where>
-        order by name DESC
+        order by name ASC
     </select>
 
 

@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 public class DeliveryDayTotalVO {
     private String productName;
     private String productType;
+    private Integer classType;
     private Integer totalCount;
     private Integer totalPrice;
 }
