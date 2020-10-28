@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -104,9 +105,10 @@ public class DeliveryUserProductAction {
             throw new BusinessException("产品配送单不存在!");
         }
         Long deliveryItemId = deliveryItem.getId();
-        if (CollectionUtils.isEmpty(deliveryUserProductSaveForm.getValues())) {
-            throw new BusinessException("保存失败，商品列表不能为空");
-        }
+
+//        if (CollectionUtils.isEmpty(deliveryUserProductSaveForm.getValues())) {
+//            throw new BusinessException("保存失败，商品列表不能为空");
+//        }
 
 
         List<DeliverySaveItemForm> deliverySaveItemForms = deliveryUserProductSaveForm.getValues();
@@ -130,12 +132,13 @@ public class DeliveryUserProductAction {
                     .productId(productId)
                     .userId(userId)
                     .totalCount(deliverySaveItemForm.getTotalCount())
-                    .totalPrice(new Double(deliverySaveItemForm.getTotalPrice() * 100).intValue())
+                    .totalPrice(multiply(deliverySaveItemForm.getTotalPrice()))
                     .build();
             deliveryDayItems.add(deliveryDayItem);
         }
-
-        deliveryDayItemDao.insertList(deliveryDayItems);
+        if (!CollectionUtils.isEmpty(deliveryDayItems)) {
+            deliveryDayItemDao.insertList(deliveryDayItems);
+        }
         return new ResponseEntity();
     }
 
@@ -157,4 +160,9 @@ public class DeliveryUserProductAction {
         return new ResponseEntity<>(isSave);
     }
 
+    public static int multiply(Double value1) {
+        BigDecimal b1 = new BigDecimal(String.valueOf(value1));
+        BigDecimal b2 = new BigDecimal(100);
+        return b1.multiply(b2).intValue();
+    }
 }
