@@ -50,4 +50,10 @@ public class ProductUpdateForm {
 
     @ApiModelProperty("图片路径")
     private String imageUrl;
+
+    @ApiModelProperty("生产日期")
+    private String manufactureDate;
+
+    @ApiModelProperty("保质日期")
+    private String guaranteeDate;
 }

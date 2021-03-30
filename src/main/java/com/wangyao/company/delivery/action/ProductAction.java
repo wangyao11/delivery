@@ -62,6 +62,8 @@ public class ProductAction {
                     .classType(productAddForm.getClassType())
                     .type(productAddForm.getType())
                     .imageUrl(productAddForm.getImageUrl())
+                    .manufactureDate(productAddForm.getManufactureDate())
+                    .guaranteeDate(productAddForm.getGuaranteeDate())
                     .build());
         } else {
             throw new BusinessException("添加失败,该产品已存在");
@@ -83,6 +85,8 @@ public class ProductAction {
                 .remark(productUpdateForm.getRemark())
                 .type(productUpdateForm.getType())
                 .imageUrl(productUpdateForm.getImageUrl())
+                .manufactureDate(productUpdateForm.getManufactureDate())
+                .guaranteeDate(productUpdateForm.getGuaranteeDate())
                 .build());
         return new ResponseEntity();
     }

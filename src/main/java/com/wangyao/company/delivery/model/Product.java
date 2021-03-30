@@ -65,6 +65,10 @@ public class Product {
     */
     private Integer sort;
 
+    private String manufactureDate;
+
+    private String guaranteeDate;
+
     /**
     * 记录创建时间
     */

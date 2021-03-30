@@ -133,6 +133,8 @@
       tp.`name` productName,
       tp.type productType,
       tp.classType classType,
+      tp.manufactureDate,
+      tp.guaranteeDate,
       SUM(totalCount) totalCount,
       SUM(totalPrice) totalPrice
     FROM

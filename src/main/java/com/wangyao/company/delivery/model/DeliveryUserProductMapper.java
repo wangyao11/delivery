@@ -59,6 +59,10 @@ public class DeliveryUserProductMapper {
 
     private String productType;
 
+    private String manufactureDate;
+
+    private String guaranteeDate;
+
     /**
     * 记录创建时间
     */

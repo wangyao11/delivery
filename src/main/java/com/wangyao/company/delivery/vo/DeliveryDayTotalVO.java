@@ -21,4 +21,7 @@ public class DeliveryDayTotalVO {
     private Integer classType;
     private Integer totalCount;
     private Integer totalPrice;
+    private String manufactureDate;
+    private String guaranteeDate;
+
 }

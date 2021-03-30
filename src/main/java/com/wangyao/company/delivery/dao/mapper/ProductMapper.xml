@@ -11,6 +11,8 @@
     <result column="states" jdbcType="TINYINT" property="states" />
     <result column="price" jdbcType="FLOAT" property="price" />
     <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="manufactureDate" jdbcType="VARCHAR" property="manufactureDate" />
+    <result column="guaranteeDate" jdbcType="VARCHAR" property="guaranteeDate" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="classType" jdbcType="INTEGER" property="classType" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
@@ -18,7 +20,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, `name`, price, imageUrl, classId, remark, states, `type`, sort, createTime, updateTime, classType
+    id, `name`, price, imageUrl, classId, remark, states, `type`, sort, createTime, updateTime, classType, manufactureDate, guaranteeDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -74,6 +76,12 @@
       <if test="classType != null">
         classType,
       </if>
+      <if test="manufactureDate != null">
+        manufactureDate,
+      </if>
+      <if test="guaranteeDate != null">
+        guaranteeDate,
+      </if>
         createTime,
         updateTime
     </trim>
@@ -104,6 +112,12 @@
       </if>
       <if test="classType != null">
         #{classType,jdbcType=INTEGER} ,
+      </if>
+      <if test="manufactureDate != null">
+        #{manufactureDate,jdbcType=VARCHAR} ,
+      </if>
+      <if test="guaranteeDate != null">
+        #{guaranteeDate,jdbcType=VARCHAR} ,
       </if>
         now(),
         now()
@@ -139,6 +153,12 @@
       </if>
       <if test="classType != null">
         classType = #{classType,jdbcType=INTEGER} ,
+      </if>
+      <if test="manufactureDate != null">
+        manufactureDate = #{manufactureDate,jdbcType=VARCHAR} ,
+      </if>
+      <if test="guaranteeDate != null">
+        guaranteeDate = #{guaranteeDate,jdbcType=VARCHAR} ,
       </if>
         updateTime = now()
     </set>
