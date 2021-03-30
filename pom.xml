@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.wangyao.company</groupId>
     <artifactId>delivery</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.9-SNAPSHOT</version>
     <name>delivery</name>
     <description>配货系统</description>
 
