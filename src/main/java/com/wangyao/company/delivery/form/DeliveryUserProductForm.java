@@ -23,4 +23,5 @@ public class DeliveryUserProductForm {
     private String endTime;
     private Long deliveryItemId;
     private Long classType;
+    private Long productId;
 }

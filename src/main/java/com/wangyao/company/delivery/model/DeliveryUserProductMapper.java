@@ -38,6 +38,8 @@ public class DeliveryUserProductMapper {
      */
     private String userName;
 
+    private String userNumber;
+
     /**
     * 产品ID
     */

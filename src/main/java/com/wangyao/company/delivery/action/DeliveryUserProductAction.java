@@ -58,6 +58,16 @@ public class DeliveryUserProductAction {
         return listResponseEntity;
     }
 
+
+    @RequestMapping(value = "listByProductId", method = RequestMethod.POST)
+    @ApiOperation(value = "查询配送单详情通过配送单Id", notes = "查询配送单详情通过配送单Id")
+    public ResponseEntity<List<DeliveryUserProductMapper>> listByProductId(@RequestBody DeliveryUserProductForm deliveryUserProductForm) {
+        List<DeliveryUserProductMapper> deliveryUserProductMappers = deliveryUserProductMapperService.listByProductId(deliveryUserProductForm);
+        ResponseEntity<List<DeliveryUserProductMapper>> listResponseEntity = new ResponseEntity<>();
+        listResponseEntity.setValue(deliveryUserProductMappers);
+        return listResponseEntity;
+    }
+
     @RequestMapping(value = "deleteById", method = RequestMethod.POST)
     @ApiOperation(value = "deleteById", notes = "删除商品从配送单中")
     public ResponseEntity deleteById(@RequestParam("id") Long id) {

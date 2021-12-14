@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.wangyao.company</groupId>
     <artifactId>delivery</artifactId>
-    <version>1.0.9-SNAPSHOT</version>
+    <version>1.1.2-SNAPSHOT</version>
     <name>delivery</name>
     <description>配货系统</description>
 
@@ -116,6 +116,46 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- Jib插件 -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.1.4</version>
+                <configuration>
+                    <!-- 拉取所需的基础镜像 - 这里用于运行springboot项目 -->
+                    <from>
+                        <image>openjdk:11</image>
+                    </from>
+                    <!-- 最后生成的镜像配置 -->
+                    <to>
+                        <!-- push到阿里云镜像仓库，如果是其它镜像仓库，将下面地址替换掉即可，ex: `Docker Hub` 的 `docker.io/zhengqing/xxx` -->
+                        <image>registry.cn-hangzhou.aliyuncs.com/wangyao_m/demo</image>
+                        <!-- 镜像版本号 -->
+                        <tags>
+                            <tag>${project.version}</tag>
+                        </tags>
+                        <auth>
+                            <username>657316992@qq.com</username>
+                            <password>root123!@#</password>
+                        </auth>
+                    </to>
+                    <container>
+
+                        <environment>
+                            <!--  配置container市区 不配置默认是UTC  -->
+                            <TZ>Asia/Shanghai</TZ>
+                        </environment>
+                    </container>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
